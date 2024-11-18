@@ -8,4 +8,4 @@ class dummyTestCase1(TestCase):
 
 class dummyTestCase2(TestCase):
     def test1(self):
-        self.assertEqual(1, 1)
+        self.assertEqual(1, 2)
