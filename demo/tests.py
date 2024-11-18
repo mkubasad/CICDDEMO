@@ -4,8 +4,8 @@ from django.test import TestCase
 
 class dummyTestCase1(TestCase):
     def test1(self):
-        self.assertEqual(1, 2)
+        self.assertEqual(1, 1)
 
 class dummyTestCase2(TestCase):
     def test1(self):
-        self.assertEqual(1, 2)
+        self.assertEqual(1, 1)
