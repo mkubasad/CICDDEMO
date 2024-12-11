@@ -11,9 +11,9 @@ body {
       padding-top: 20px;
       padding-right: 50px;
       clear:left;
-      /* background-image: url("https://www.shutterstock.com/image-photo/diversity-people-group-team-union-concept-374588935"); */
-      /* background-image: url("/static/PatientManagementSystem/images/istockphoto-1300505874-612x612.jpg"); */
-      /* background-image:  url("/static/PatientManagementSystem/images/pexels-fauxels-3184398.jpg"); */
+      background-image: url("/static/demo/images/pexels-efrem-efre-2786187-29644504.jpg");
+      background-size: cover;
+      background-position: 400px 10em;
       /* background-color: dodgerblue; */
       /* background-repeat: repeat-x; */
       color: darkgray;
