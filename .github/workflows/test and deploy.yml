@@ -44,8 +44,8 @@ jobs:
   ##Deployment on successful build and test###############
   deploy:
     needs: build
-    runs-on: self-hosted
-    # runs-on: ubuntu-latest
+    # runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Deploy
     steps:
       # Configure AWS credentials
