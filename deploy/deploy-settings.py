@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os, json
+import os
+import json
 
 with open('config.yaml') as config_file:
     config = json.load(config_file)
