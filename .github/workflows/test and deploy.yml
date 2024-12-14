@@ -61,6 +61,7 @@ jobs:
     - name: Set up SSH key for EC2
       run: |
         echo "${{ secrets.AWS_DEMOSERVERRSAKEY }}" > ~/.ssh/id_rsa
+        ls -la ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
     - name: SSH into EC2 and run commands
