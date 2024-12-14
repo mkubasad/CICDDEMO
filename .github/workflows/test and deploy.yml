@@ -67,7 +67,9 @@ jobs:
     - name: SSH into EC2 and run commands
       run: |
         # Add EC2 host to known hosts (prevent SSH prompt)
+        echo "ssh-keyscan -H ${{ secrets.IP_ADDRESS }}"
         ssh-keyscan -H ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
+        #ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
 
         # SSH into the EC2 instance and run commands
         ssh -i ~/.ssh/id_rsa.pem ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
