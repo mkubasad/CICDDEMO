@@ -62,7 +62,7 @@ jobs:
       run: |
         echo "${{ secrets.AWS_DEMOSERVERRSAKEY }}" > ~/.ssh/id_rsa
         ls -la ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/
 
     - name: SSH into EC2 and run commands
       run: |
