@@ -34,7 +34,7 @@ jobs:
       run: |
         mkdir ~/.ssh
         echo "${{ secrets.AWS_DEMOSERVERRSAKEY }}" > ~/.ssh/id_rsa.pem
-        chmod 600 ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa.pem
         touch ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
         echo "${{ secrets.IP_ADDRESS }}  ssh_rsa  ${{ secrets.AWS_DEMOSERVERRSAKEY }}" > ~/.ssh/known_hosts
