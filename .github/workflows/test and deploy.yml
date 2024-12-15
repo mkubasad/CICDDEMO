@@ -38,16 +38,11 @@ jobs:
         touch ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
         echo "${{ secrets.IP_ADDRESS }}  ssh_rsa  ${{ secrets.AWS_DEMOSERVERRSAKEY }}" > ~/.ssh/known_hosts
-        cat ~/.ssh/known_hosts
+        # cat ~/.ssh/known_hosts
 
     - name: SSH into EC2 and run commands
       run: |
-        # Add EC2 host to known hosts (prevent SSH prompt)
-        # ssh-keyscan -H ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
-        # ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-        
-        # SSH into the EC2 instance and run commands
-        ssh -i ~/.ssh/id_rsa.pem  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
+        ssh -i ~/.ssh/id_rsa.pem  ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
           # Add commands to run on EC2, like deploying your app
           echo "Logged into EC2"
         EOF
