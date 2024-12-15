@@ -40,11 +40,9 @@ jobs:
         ssh-keyscan ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
         echo "Completed updating known hosts!!!"
         ls -la /dev/tty
-        console=`tty`
-        ln -s $console /dev/tty
     - name: SSH into EC2 and run commands
       run: |
-        ssh -v -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
+        ssh -v -T -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
           # Add commands to run on EC2, like deploying your app
           echo "Logged into EC2"
         EOF
