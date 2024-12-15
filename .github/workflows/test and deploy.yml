@@ -39,7 +39,7 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
         ssh-keyscan ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
         echo "Completed updating known hosts!!!"
-
+        ls -la /dev/tty
     - name: SSH into EC2 and run commands
       run: |
         ssh -v -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
