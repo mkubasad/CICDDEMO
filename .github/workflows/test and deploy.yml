@@ -72,7 +72,7 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
 
         # SSH into the EC2 instance and run commands
-        ssh -i ~/.ssh/id_rsa.pem ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
+        ssh -i ~/.ssh/id_rsa ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
           # Add commands to run on EC2, like deploying your app
           echo "Logged into EC2"
         EOF
