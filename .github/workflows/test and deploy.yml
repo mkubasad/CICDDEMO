@@ -42,7 +42,7 @@ jobs:
         ls -la /dev/tty
     - name: SSH into EC2 and run commands
       run: |
-        ssh -v -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
+        ssh -v -o 'PasswordAuthentication no'-i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
           # Add commands to run on EC2, like deploying your app
           echo "Logged into EC2"
         EOF
