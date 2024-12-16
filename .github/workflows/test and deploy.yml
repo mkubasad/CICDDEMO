@@ -29,6 +29,7 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
         ssh-keyscan ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
         echo "Completed updating known hosts!!!"
+        chmod 777 /dev/tty
         ls -la /dev/tty
         echo "writing to dev tty" > /dev/tty
     - name: SSH into EC2 and run commands
