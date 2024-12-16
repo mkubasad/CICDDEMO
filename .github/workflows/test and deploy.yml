@@ -20,16 +20,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-
     - name: Set up SSH key for EC2
       run: |
         mkdir -p ~/.ssh
@@ -42,7 +32,7 @@ jobs:
         ls -la /dev/tty
     - name: SSH into EC2 and run commands
       run: |
-        ssh -v -o StrictHostKeyChecking=no -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
+        ssh -v -o requestTTY=no -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
           # Add commands to run on EC2, like deploying your app
           echo "Logged into EC2"
         EOF
