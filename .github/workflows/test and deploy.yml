@@ -26,7 +26,18 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.AWS_DEMOSERVERRSAKEY }}
 
-      - name: Git Pull
+      - name: Configure connecion to EC2
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          touch ~/.ssh/private.key
+          touch ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/private.key
+          echo -e "${{ secrets.AWS_DEMOSERVERRSAKEY }}" | tr -d '\r' > ~/.ssh/private.key
+          # Append keyscan output into known hosts
+          ssh-keyscan ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+      - name: Connect to EC2
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -v -t rsa ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
