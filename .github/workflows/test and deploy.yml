@@ -26,10 +26,9 @@ jobs:
           touch ~/.ssh/private.key
           chmod 600 ~/.ssh/private.key
           echo -e "$PRIVATE_KEY" | tr -d '\r' > ~/.ssh/private.key
-          # cd devops/ansible/
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/private.key  
-          ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com
+          ssh -tt ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com
   #################################
 
   
