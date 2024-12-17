@@ -16,26 +16,22 @@ jobs:
   ##Deployment on successful build and test###############
 
   #################################
+
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up SSH key for EC2
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.AWS_DEMOSERVERRSAKEY }}" > ~/.ssh/id_rsa.pem
-        chmod 600 ~/.ssh/id_rsa.pem
-        touch ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/known_hosts
-        ssh-keyscan ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
-        echo "Completed updating known hosts!!!"
-        ls -la /dev/tty
-        # echo "writing to dev tty" > /dev/tty
-    - name: SSH into EC2 and run commands
-      run: |
-        ssh -v -t -t -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
+      - name: Configure SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.AWS_DEMOSERVERRSAKEY }}
+
+      - name: Git Pull
+        run: |
+          ssh-keyscan -v -t rsa ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
+          ssh -v  -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
           # Add commands to run on EC2, like deploying your app
           echo "Logged into EC2"
-        EOF
+          EOF
   ################################
   
