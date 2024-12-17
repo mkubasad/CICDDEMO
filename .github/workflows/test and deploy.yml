@@ -28,6 +28,7 @@ jobs:
 
       - name: Git Pull
         run: |
+          mkdir -p ~/.ssh
           ssh-keyscan -v -t rsa ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
           ssh -v  -i "~/.ssh/id_rsa.pem"  mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
           # Add commands to run on EC2, like deploying your app
