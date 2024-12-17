@@ -27,7 +27,6 @@ jobs:
           host: ${{ secrets.IP_ADDRESS }}
           username: mk_deployer
           key: ${{ secrets.AWS_DEMOSERVERRSAKEY }}
-          port: 22
           script: |
             echo "Hi - welcome to EC2"
             # cd /var/www/test
