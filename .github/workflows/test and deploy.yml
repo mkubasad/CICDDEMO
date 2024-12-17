@@ -14,37 +14,23 @@ on:
 jobs:
   
   ##Deployment on successful build and test###############
-
+  
   #################################
 
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Configure SSH
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: multiple command
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.AWS_DEMOSERVERRSAKEY }}
-
-      - name: Configure connecion to EC2
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          touch ~/.ssh/private.key
-          touch ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/private.key
-          echo -e "${{ secrets.AWS_DEMOSERVERRSAKEY }}" | tr -d '\r' > ~/.ssh/private.key
-          # Append keyscan output into known hosts
-          ssh-keyscan ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-      - name: Connect to EC2
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -v -t rsa ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
-          ssh-keyscan -v -t rsa ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts2
-          ssh -v -t mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com '/bin/bash' << 'EOF'
-          # Add commands to run on EC2, like deploying your app
-          echo "Logged into EC2"
-          EOF
+          host: ${{ secrets.IP_ADDRESS }}
+          username: mk_deployer
+          key: ${{ secrets.AWS_DEMOSERVERRSAKEY }}
+          port: 22
+          script: |
+            echo "Hi - welcome to EC2"
+            # cd /var/www/test
+            # ls -al
   ################################
   
