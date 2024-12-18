@@ -45,7 +45,7 @@ jobs:
             echo "After a lot of troubleshooting"
             whoami; pwd
             cat xyz
-            logout
+            exit
           " 
           #################################
 
