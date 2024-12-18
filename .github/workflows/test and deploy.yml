@@ -40,12 +40,13 @@ jobs:
           #   echo "Logged into EC2"
           #   echo "After a lot of troubleshooting"
           # EOF
-          ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  
+          ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
             echo "Logged into EC2";
             echo "After a lot of troubleshooting"
             whoami; pwd
             cat xyz
             exit
-  #################################
+          " 
+          #################################
 
   
