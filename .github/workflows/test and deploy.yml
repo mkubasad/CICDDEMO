@@ -29,7 +29,7 @@ jobs:
           # echo -e "$PRIVATE_KEY" | tr -d '\r' > ~/.ssh/private.key
           echo -e "$PRIVATE_KEY" > ~/.ssh/private.key
           ssh-keyscan ec2-16-170-141-234.eu-north-1.compute.amazonaws.com > ~/.ssh/known_hosts
-          # eval "$(ssh-agent -s)"
+          eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/private.key  
           echo "this hello is from github runner" > ~/xyz
           #scp -i ~/.ssh/private.key ~/xyz ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
