@@ -30,6 +30,7 @@ jobs:
           echo -e "$PRIVATE_KEY" > ~/.ssh/private.key
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/private.key  
+          which ssh
           ssh -tt ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com
   #################################
 
