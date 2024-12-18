@@ -34,10 +34,16 @@ jobs:
           echo "this came from github runner" > ~/xyz
           # scp -i ~/.ssh/private.key ~/xyz ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
           # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
-          ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  << 'EOF'
-          # Add commands to run on EC2, like deploying your app
-            echo "Logged into EC2"
+          # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  << 'EOF'
+          # # Add commands to run on EC2, like deploying your app
+          #   echo "Logged into EC2"
+          #   echo "After a lot of troubleshooting"
+          # EOF
+          ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
+            echo "Logged into EC2";
             echo "After a lot of troubleshooting"
+            whoami
+            pwd
           EOF
   #################################
 
