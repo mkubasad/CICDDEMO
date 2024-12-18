@@ -40,10 +40,11 @@ jobs:
           #   echo "After a lot of troubleshooting"
           # EOF
           ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
+            # This is a comment
             echo "Logged into EC2";
             echo "After a lot of troubleshooting"
-            whoami
-            pwd
+            whoami; pwd
+            cat xyz
           "
   #################################
 
