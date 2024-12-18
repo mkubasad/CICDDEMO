@@ -32,8 +32,8 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/private.key  
           echo "this came from github runner" > ~/xyz
-          scp -i ~/.ssh/private.key ~/xyz ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
-          # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com
+          # scp -i ~/.ssh/private.key ~/xyz ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
+          ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com
   #################################
 
   
