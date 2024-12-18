@@ -31,7 +31,7 @@ jobs:
           ssh-keyscan ec2-16-170-141-234.eu-north-1.compute.amazonaws.com > ~/.ssh/known_hosts
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/private.key  
-          echo "this is a new file from github runner" > ~/xyz
+          echo "this hello is from github runner" > ~/xyz
           #scp -i ~/.ssh/private.key ~/xyz ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
           scp ~/xyz mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
           # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
@@ -40,13 +40,12 @@ jobs:
           #   echo "Logged into EC2"
           #   echo "After a lot of troubleshooting"
           # EOF
-          ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
-            # This is a comment
+          ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  
             echo "Logged into EC2";
             echo "After a lot of troubleshooting"
             whoami; pwd
             cat xyz
-          "
+            exit
   #################################
 
   
