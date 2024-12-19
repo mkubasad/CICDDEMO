@@ -63,13 +63,10 @@ jobs:
         ssh-keyscan ec2-16-170-141-234.eu-north-1.compute.amazonaws.com > ~/.ssh/known_hosts
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/private.key  
-        echo "this hello is from github runner" > ~/xyz
-        scp ~/xyz mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
+        
         echo "copying project files from github to aws ec2"
-        echo `pwd`
+        
         rsync -rv -e ssh --exclude '.*' --exclude '*.toml' --exclude '*.bat' --exclude '*.cfg' --exclude 'venv' `pwd` mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
-        # scp -r `pwd`/CiCdDemo mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
-
 
         ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
           echo "Logged into EC2";
