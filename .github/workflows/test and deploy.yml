@@ -66,7 +66,7 @@ jobs:
         echo "this hello is from github runner" > ~/xyz
         scp ~/xyz mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
         echo "copying project files from github to aws ec2"
-        scp -r . mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
+        scp -r ~/ mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
         # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
         # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  << 'EOF'
         # # Add commands to run on EC2, like deploying your app
