@@ -67,7 +67,12 @@ jobs:
         scp ~/xyz mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
         echo "copying project files from github to aws ec2"
         echo `pwd`
-        scp -r `pwd` mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
+        scp -r `pwd`/CiCdDemo mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
+        scp -r `pwd`/demo mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
+        scp -r `pwd`/deploy mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
+        scp -r `pwd`/manage.py mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
+        scp -r `pwd`/requirements.txt mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
+
         ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
           echo "Logged into EC2";
           # move deploy settings file 
