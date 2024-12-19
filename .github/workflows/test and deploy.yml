@@ -67,17 +67,16 @@ jobs:
         scp ~/xyz mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
         echo "copying project files from github to aws ec2"
         echo `pwd`
-        scp -r `pwd`/CiCdDemo mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
-        scp -r `pwd`/demo mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
-        scp -r `pwd`/deploy mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
-        scp -r `pwd`/manage.py mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
-        scp -r `pwd`/requirements.txt mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
+        rsync -rv -e ssh --exclude '.*' --exclude '*.toml' --exclude '*.bat' --exclude '*.cfg' --exclude 'venv' `pwd` mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
+        # scp -r `pwd`/CiCdDemo mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~/CICDDEMO
+
 
         ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
           echo "Logged into EC2";
           # move deploy settings file 
           cd ~/CICDDEMO
           mv deploy/deploy-settings.py CiCdDemo/settings.py # overwrites the dev environments settings.py file
+          mv deploy/deploy-requirements.txt requirements.txt # overwrites the dev environments requirements.txt file
 
           # create and activate virtual environment
           echo "Creating and activating virtual environment"
@@ -97,9 +96,9 @@ jobs:
           python3 manage.py migrate
 
           # Restart the gunicorn and nginx servers
-          echo "Restarting gunicorn and nginx servers"
-          chmod +x deploy/run.sh
-          source deploy/run.sh
+          # echo "Restarting gunicorn and nginx servers"
+          # chmod +x deploy/run.sh
+          # source deploy/run.sh
 
           exit
         " 
