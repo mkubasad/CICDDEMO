@@ -12,41 +12,72 @@ on:
   workflow_dispatch:
 
 jobs:
-  
+  build: 
+    runs-on: ubuntu-latest
+    steps: 
+    - uses: actions/checkout@v3
+    - name: Set up Python 
+      uses: actions/setup-python@v2
+      with: 
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Lint with ruff
+      run: |
+        pip install ruff
+        ruff check .
+    - name: Make django DB migrations
+      run: |
+        python3 manage.py migrate 
+      
+    - name: Coverage report
+      run: |
+        pip install coverage
+        coverage run manage.py test
+        coverage report
+    - name: Django Testing
+      run: |
+        python3 manage.py test
+
   ##Deployment on successful build and test###############
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-      - name: Deploy to AWS
-        shell: bash
-        env:
-          PRIVATE_KEY : ${{ secrets.AWS_DEMOSERVERRSAKEY  }}
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          touch ~/.ssh/private.key
-          chmod 600 ~/.ssh/private.key
-          # echo -e "$PRIVATE_KEY" | tr -d '\r' > ~/.ssh/private.key
-          echo -e "$PRIVATE_KEY" > ~/.ssh/private.key
-          ssh-keyscan ec2-16-170-141-234.eu-north-1.compute.amazonaws.com > ~/.ssh/known_hosts
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/private.key  
-          echo "this hello is from github runner" > ~/xyz
-          #scp -i ~/.ssh/private.key ~/xyz ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
-          scp ~/xyz mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
-          # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
-          # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  << 'EOF'
-          # # Add commands to run on EC2, like deploying your app
-          #   echo "Logged into EC2"
-          #   echo "After a lot of troubleshooting"
-          # EOF
-          ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
-            echo "Logged into EC2";
-            echo "After a lot of troubleshooting"
-            whoami; pwd
-            cat xyz
-            exit
-          " 
-          #################################
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy to AWS
+      shell: bash
+      env:
+        PRIVATE_KEY : ${{ secrets.AWS_DEMOSERVERRSAKEY  }}
+      run: |
+        pwd
+        ls -la
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        touch ~/.ssh/private.key
+        chmod 600 ~/.ssh/private.key
+        # echo -e "$PRIVATE_KEY" | tr -d '\r' > ~/.ssh/private.key
+        echo -e "$PRIVATE_KEY" > ~/.ssh/private.key
+        ssh-keyscan ec2-16-170-141-234.eu-north-1.compute.amazonaws.com > ~/.ssh/known_hosts
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/private.key  
+        echo "this hello is from github runner" > ~/xyz
+        scp ~/xyz mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com:~
+        # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com 'bash -s' << 'EOF'
+        # ssh ubuntu@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  << 'EOF'
+        # # Add commands to run on EC2, like deploying your app
+        #   echo "Logged into EC2"
+        #   echo "After a lot of troubleshooting"
+        # EOF
+        ssh mk_deployer@ec2-16-170-141-234.eu-north-1.compute.amazonaws.com  "
+          echo "Logged into EC2";
+          echo "After a lot of troubleshooting"
+          whoami; pwd
+          cat xyz
+          exit
+        " 
+        #################################
 
   
