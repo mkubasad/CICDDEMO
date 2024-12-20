@@ -1,6 +1,4 @@
 from django import forms
-from . import models
-
 
 class PMSBaseForm(forms.Form):
     error_css_class = 'error'
