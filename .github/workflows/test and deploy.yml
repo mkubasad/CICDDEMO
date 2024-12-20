@@ -88,9 +88,9 @@ jobs:
           pip install -r requirements.txt
           pip install gunicorn
 
-          # Make django DB migrations
-          # echo "Making DB migrations"
-          # python3 manage.py migrate
+          Make django DB migrations
+          echo "Making DB migrations"
+          python3 manage.py migrate
 
           # Restart the gunicorn and nginx servers
           echo "Restarting gunicorn and nginx servers"
