@@ -15,7 +15,8 @@ class Doctor(models.Model):
             raise ValidationError("Duration should be between 10 and 120 and a multiple of 5")
         return duration
     def generateCertFileNameWithPath(instance, filename):
-        dirPath = "uploads\certificates\\"
+        # dirPath = "uploads\certificates\\"
+        dirPath = "uploads/certificates//"
         _, fileExt = splitext(filename)
         board_reg_no = instance.board_reg_no
         doctor_name = instance.first_name + "-" + instance.last_name
