@@ -93,9 +93,9 @@ jobs:
           # python3 manage.py migrate
 
           # Restart the gunicorn and nginx servers
-          # echo "Restarting gunicorn and nginx servers"
-          # chmod +x deploy/run.sh
-          # source deploy/run.sh
+          echo "Restarting gunicorn and nginx servers"
+          chmod +x deploy/run.sh
+          source deploy/run.sh
 
           exit
         " 

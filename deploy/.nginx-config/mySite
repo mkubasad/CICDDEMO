@@ -3,8 +3,8 @@ server {
     listen [::]:80;
     server_name 16.170.141.234;
 
-    location /static/ {
-        alias /home/ubuntu/CiCdDemo/static;
+    location /static {
+        alias /home/mk_deployer/CICDDEMO/static;
         try_files $uri =404;
     }
 
