@@ -89,8 +89,10 @@ jobs:
           pip install gunicorn
 
           Make django DB migrations
-          echo "Making DB migrations"
+          echo "Making DB migrations"pyt
           python3 manage.py migrate
+
+          # Copy system data into DB (To be done)
 
           # Restart the gunicorn and nginx servers
           echo "Restarting gunicorn and nginx servers"

@@ -34,9 +34,12 @@ def createDoctor(request):
             systemSeq = models.Sequence.objects.get(pk="DR")
             last_number = systemSeq.last_number+1
             
+            
             doctor.system_reg_no = systemSeq.prefix+f'{last_number:>010}'
             if request.FILES.get('board_reg_cert'):
                 doctor.board_reg_cert = request.FILES['board_reg_cert']
             doctor.save()
+            systemSeq.last_number = last_number
+            systemSeq.save()
             messages.add_message(request, messages.INFO, 'Information saved for doctor: '+str(doctor))
             return redirect(reverse('demo:home', kwargs={}))
