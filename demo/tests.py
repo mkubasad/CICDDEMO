@@ -24,6 +24,4 @@ class testAddDoctor(TestCase):
         d.active = 'Y'
         d.save()
         q = models.Doctor.objects.filter(last_name='Becker')
-        self.assertEqual(
-                str(d) == str(q)
-        )
+        self.assertEqual(str(d), str(q))
