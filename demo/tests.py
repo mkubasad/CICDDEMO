@@ -23,5 +23,5 @@ class testAddDoctor(TestCase):
         d.average_time_per_patient = 20
         d.active = 'Y'
         d.save()
-        q = models.Doctor.objects.filter(last_name='Becker')
+        q = models.Doctor.objects.filter(last_name='Becker')[0]
         self.assertEqual(str(d), str(q))
