@@ -93,7 +93,7 @@ jobs:
           python3 manage.py migrate
 
           # Collect static files of the project
-          python3 manage.py collectstatic
+          echo 'yes' | python3 manage.py collectstatic
 
 
           # Copy system data into DB (To be done)
