@@ -3,11 +3,11 @@ name: Django Tests
 on:
   push: 
     branches: 
-      - main
+      - debug
 
   pull_request:
     branches:
-      - main
+      - debug
 
   workflow_dispatch:
 
